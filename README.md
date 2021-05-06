@@ -1,6 +1,6 @@
 # Stack Overflow Developer Survey Charts 2020
 
-This repository is made for visualizing the Stack Overflow Developer Survey 2020 results. Currently only Python related stats are visualized.
+This repository is made for visualizing the Stack Overflow Developer Survey 2020 results. Currently stats only for Python and Rust are visualized.
 
 ## Charts
 
@@ -8,6 +8,7 @@ You can see generated charts for Python related stats in the following pages.
 
 - [plot_so_developer_survey_python.ipynb](https://github.com/gh640/stack-overflow-developer-survey-charts-2020/blob/main/plot_so_developer_survey_python.ipynb)
 - [charts-python.md](https://github.com/gh640/stack-overflow-developer-survey-charts-2020/blob/main/charts-python.md)
+- [charts-rust.md](https://github.com/gh640/stack-overflow-developer-survey-charts-2020/blob/main/charts-rust.md)
 
 ## Prerequisites
 
