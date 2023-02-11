@@ -1,6 +1,4 @@
-FROM python:3.9
-
-ARG POETRY_VERSION="1.1.6"
+FROM python:3.11
 
 ENV PYTHONDONTWRITEBYTECODE=1 \
   PYTHONUNBUFFERED=1 \
@@ -8,19 +6,25 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
   PYTHONIOENCODING="UTF-8" \
   PIP_NO_CACHE_DIR=off \
   PIP_DISABLE_PIP_VERSION_CHECK=on \
-  PATH="/root/.poetry/bin:$PATH"
-
-WORKDIR /app
+  POETRY_NO_INTERACTION=1 \
+  POETRY_VIRTUALENVS_CREATE=false \
+  PATH="/root/.local/bin:$PATH"
 
 RUN python -m pip install -U pip
 
+ARG POETRY_VERSION="1.3.2"
+ARG POETRY_URL="https://install.python-poetry.org"
+
+WORKDIR /tmp
+
 # Install `poetry`.
-ADD https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py /tmp/get-poetry.py
-RUN python /tmp/get-poetry.py --version "${POETRY_VERSION}" && \
-  poetry config virtualenvs.create false
+ADD "${POETRY_URL}" ./install-poetry.py
+RUN python ./install-poetry.py --version "${POETRY_VERSION}"
+
+WORKDIR /app
 
 COPY ./pyproject.toml ./poetry.lock ./
 
-RUN poetry install --no-interaction
+RUN poetry install
 
 CMD ["/usr/local/bin/jupyter", "notebook", "--allow-root", "--ip=0.0.0.0"]
