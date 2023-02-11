@@ -36,6 +36,7 @@ $ git clone https://github.com/gh640/stack-overflow-developer-survey-charts-2020
 ### 2. Build Docker image.
 
 ```bash
+docker compose build
 ```
 
 ### 3. Download the survey data.
@@ -45,6 +46,15 @@ Download the csv file which contains the survey results by clicking `Download Fu
 - [Stack Overflow Insights - Developer Hiring, Marketing, and User Research](https://insights.stackoverflow.com/survey)
 
 Then, extract the zip file and put the csv file named `survey_results_public.csv` under `data/` directory.
+
+```bash
+TMP_ZIP="/tmp/2020.zip"
+ZIP_URL="https://info.stackoverflowsolutions.com/rs/719-EMH-566/images/stack-overflow-developer-survey-2020.zip"
+
+http -d --output="${TMP_ZIP}" "${ZIP_URL}"
+unzip "${TMP_ZIP}" -d /tmp/
+mv /tmp/survey_results_public.csv ./data/
+```
 
 ### 4. Run Jupyter notebook.
 
